@@ -18,6 +18,13 @@
 
   {{ filterForm.value | json}}
 
+  <ul>
+    <li *ngFor="let todo of todos" (click)="changeTodo(todo)">
+      <span>{{ todo.name }}</span>
+      <span>{{ todo.checked }}</span>
+    </li>
+  </ul>
+
   <form
     class="add-todo-form"
     role="form"

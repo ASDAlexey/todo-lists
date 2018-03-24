@@ -10,10 +10,10 @@ import { SharedConstants } from '../../shared.constant';
   styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent {
-  @Input() submitted: boolean = false;
-  @Input() form: FormGroup;
-  @Input() control;
-  @Input() label: string;
+  @Input() submitted?: boolean = false;
+  @Input() form?: FormGroup;
+  @Input() control?;
+  @Input() label?: string;
 
   uniqId: string = _.uniqueId('checkbox');
 }

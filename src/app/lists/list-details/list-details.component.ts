@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ListModel } from '../list.model';
 import { Filters } from '../filtes.enum';
+import { TodoModel } from '../todo.model';
 
 @Component({
   selector: 'app-product-add-edit',
@@ -12,6 +12,7 @@ export class ListDetailsComponent implements OnInit {
   filterForm: FormGroup;
   todoForm: FormGroup;
   filters = Filters;
+  todos: TodoModel[] = [TodoModel.create({ name: 'Apple', listId: 9 })];
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -43,5 +44,9 @@ export class ListDetailsComponent implements OnInit {
     if (this.todoForm.valid) {
       console.log(this.todoForm.value);
     }
+  }
+
+  changeTodo(todo: TodoModel) {
+    console.log(todo);
   }
 }
