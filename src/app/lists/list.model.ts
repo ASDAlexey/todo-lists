@@ -1,4 +1,5 @@
-import { get } from 'lodash';
+import * as uuidv4 from 'uuid/v4';
+import get from 'lodash-es/get';
 import { AbstractModel } from '../shared/model/abstract.model';
 
 export class ListModel extends AbstractModel {
@@ -8,7 +9,7 @@ export class ListModel extends AbstractModel {
 
   constructor(data) {
     super();
-    if (get(data, 'id')) this.id = data.id;
+    this.id = get(data, 'id') ? data.id : uuidv4();
     this.name = get(data, 'name');
     this.todos = [];
   }
