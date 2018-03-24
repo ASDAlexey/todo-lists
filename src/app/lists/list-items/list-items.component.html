@@ -2,11 +2,10 @@
   <h1 class="title"><span class="ttu">Todo</span> Lists</h1>
 
   <ul class="list">
-    <li class="list-item">
-      <a class="list-item__link" [routerLink]="['/lists', 9]">List name (5/10)</a>
-    </li>
-    <li class="list-item">
-      <a class="list-item__link" [routerLink]="['/lists', 10]">List name (5/10)</a>
+    <li class="list-item" *ngFor="let item of list">
+      <a class="list-item__link" [routerLink]="['/lists', item.id]">
+        {{ item.name }} ({{ item.getCountUndoneTodos() }}/{{item.todos.length}})
+      </a>
     </li>
   </ul>
   <form

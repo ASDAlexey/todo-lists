@@ -6,12 +6,16 @@ import { TodoModel } from './todo.model';
 export class ListModel extends AbstractModel {
   id?: number;
   name: string;
-  todos: TodoModel[];
+  todos?: TodoModel[];
 
   constructor(data) {
     super();
     this.id = get(data, 'id') ? data.id : uuidv4();
     this.name = get(data, 'name');
     this.todos = get(data, 'todos', []);
+  }
+
+  getCountUndoneTodos() {
+    return this.todos.filter(todo => (!todo.checked)).length;
   }
 }
