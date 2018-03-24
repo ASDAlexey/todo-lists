@@ -14,10 +14,7 @@ export class CheckboxComponent {
   @Input() form: FormGroup;
   @Input() control;
   @Input() label: string;
-  @Input() linkText: string;
-  @Input() link: string;
 
-  ASSETS_URL: string = SharedConstants.ASSETS_URL;
   uniqId: string = _.uniqueId('checkbox');
 }
 

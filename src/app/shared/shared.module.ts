@@ -7,6 +7,7 @@ import { InputComponent } from './components/input/input.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { ReplacePipe } from './pipes/replace.pipe';
 import { SharedConstants } from './shared.constant';
+import { RadioComponent } from './components/radio/radio.component';
 
 const modules = [
   FormsModule,
@@ -25,6 +26,7 @@ const pipes = [
 const components = [
   InputComponent,
   CheckboxComponent,
+  RadioComponent,
   ButtonComponent,
   PreloaderComponent,
 ];

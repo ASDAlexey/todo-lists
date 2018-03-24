@@ -1,8 +1,25 @@
 <div class="container">
   <h1 class="title">Details page</h1>
+  filtersForm
+  <form [formGroup]="filterForm">
+    <app-input
+      [form]="filterForm"
+      control="search"
+      maxLength="20"
+      placeholder="Search..."
+    ></app-input>
+    <app-radio-group
+      [form]="filterForm"
+      control="filter"
+      [labels]="[filters.All,filters.Undone]"
+      [values]="[filters.All.toLowerCase(),filters.Undone.toLowerCase()]"
+    ></app-radio-group>
+  </form>
+
+  {{ filterForm.value | json}}
 
   <form
-    class="form"
+    class="add-todo-form"
     role="form"
     [formGroup]="todoForm"
     (keydown.enter)="addTodo()"

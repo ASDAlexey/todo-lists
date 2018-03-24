@@ -1,0 +1,12 @@
+<div class="form-group form-block" [formGroup]="form">
+  <div *ngFor="let value of values; let i = index">
+    <label for="{{getUniqId(i)}}" class="radio-label">{{labels[i]}}</label>
+    <input
+      type="radio"
+      class="form-control"
+      [formControlName]="control"
+      [value]="value"
+      id="{{getUniqId(i)}}"
+    >
+  </div>
+</div>
