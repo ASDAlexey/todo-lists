@@ -7,9 +7,6 @@ import { clone, without } from 'lodash';
   styleUrls: ['./list-items.component.scss'],
 })
 export class ListItemsComponent implements OnInit {
-  constructor() {
-  }
-
   ngOnInit() {
   }
 }
