@@ -4,7 +4,7 @@ import { AbstractModel } from '../shared/model/abstract.model';
 import { TodoModel } from './todo.model';
 
 export class ListModel extends AbstractModel {
-  id?: number;
+  id?: string;
   name: string;
   todos?: TodoModel[];
 

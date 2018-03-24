@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { clone, without } from 'lodash';
 import { ListModel } from '../list.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TodoModel } from '../todo.model';
 
 @Component({
   selector: 'app-product-list',

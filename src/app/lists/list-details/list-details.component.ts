@@ -10,7 +10,7 @@ import { TodoModel } from '../todo.model';
   styleUrls: ['./list-details.component.scss'],
 })
 export class ListDetailsComponent implements OnInit {
-  routeId: number;
+  routeId: string;
   filterForm: FormGroup;
   todoForm: FormGroup;
   filters = Filters;
@@ -19,7 +19,7 @@ export class ListDetailsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.routeId = +activatedRoute.snapshot.params.id;
+    this.routeId = activatedRoute.snapshot.params.id;
   }
 
   initFilterForm() {

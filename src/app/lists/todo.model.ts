@@ -3,7 +3,7 @@ import get from 'lodash-es/get';
 import { AbstractModel } from '../shared/model/abstract.model';
 
 export class TodoModel extends AbstractModel {
-  id?: number;
+  id?: string;
   name: string;
   checked: boolean;
   listId: number;

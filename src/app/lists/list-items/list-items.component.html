@@ -3,7 +3,7 @@
 
   <ul class="list">
     <li class="list-item" *ngFor="let item of list">
-      <a class="list-item__link" [routerLink]="['/lists', item.id]">
+      <a class="list-item__link" [routerLink]="['/lists', item.id]" [queryParams]="{filter:'all'}">
         {{ item.name }} ({{ item.getCountUndoneTodos() }}/{{item.todos.length}})
       </a>
     </li>
