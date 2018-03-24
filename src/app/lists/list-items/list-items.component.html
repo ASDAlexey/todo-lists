@@ -1,4 +1,27 @@
-<div>
-  list items
-  <a [routerLink]="['/lists', 10]">List details</a>
+<div class="container lists">
+  <h1 class="lists__title"><span class="ttu">Todo</span> Lists</h1>
+
+  <ul class="list">
+    <li class="list-item">
+      <a class="list-item__link" [routerLink]="['/lists', 9]">List name (5/10)</a>
+    </li>
+    <li class="list-item">
+      <a class="list-item__link" [routerLink]="['/lists', 10]">List name (5/10)</a>
+    </li>
+  </ul>
+  <form
+    class="form"
+    role="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    [ngClass]="{submited:submitted}"
+  >
+    <app-input
+      [form]="form"
+      [submitted]="submitted"
+      control="name"
+      maxLength="20"
+    ></app-input>
+    <app-button>Create</app-button>
+  </form>
 </div>

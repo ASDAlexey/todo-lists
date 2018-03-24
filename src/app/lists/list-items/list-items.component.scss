@@ -1,0 +1,19 @@
+@import '../../../assets/styles/imports/_variables.scss';
+
+.lists {
+  &__title {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+.list {
+  &-item {
+    margin-top: 7px;
+
+    &__link {
+      color: $black;
+      text-transform: none;
+    }
+  }
+}

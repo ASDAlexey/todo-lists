@@ -15,10 +15,10 @@ export class InputComponent {
   @Input() errorsHide?: boolean = false;
   @Input() formGroupName;
   @Input() maxLength?;
-  @Input() disabled? = false;
+  @Input() disabled?: boolean = false;
   @Input() currency?;
   @Input() label?: string;
-  @Input() options? = {
+  @Input() options?: any = {
     align: 'right',
     allowNegative: false,
     allowZero: true,
