@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="title">Details page</h1>
+  <h1 class="title">Details page list: {{ listItem.name }}</h1>
   filtersForm
   <form [formGroup]="filterForm">
     <app-input
@@ -19,7 +19,7 @@
   {{ filterForm.value | json}}
 
   <ul>
-    <li *ngFor="let todo of listItem.todos" (click)="changeTodo(todo)">
+    <li *ngFor="let todo of todos" (click)="changeTodo(todo)">
       <span>{{ todo.name }}</span>
       <span>{{ todo.checked }}</span>
     </li>

@@ -16,7 +16,7 @@ export class ListModel extends AbstractModel {
     this.todos = map(get(data, 'todos', []), todo => TodoModel.create(todo));
   }
 
-  getCountUndoneTodos() {
-    return this.todos.filter(todo => (!todo.checked)).length;
+  getCountCheckedTodos() {
+    return this.todos.filter(todo => todo.checked).length;
   }
 }

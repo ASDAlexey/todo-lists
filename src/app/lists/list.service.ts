@@ -3,12 +3,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ListModel } from './list.model';
 import { from } from 'rxjs/observable/from';
 import get from 'lodash-es/get';
+import findIndex from 'lodash-es/findIndex';
 import { filter, map } from 'rxjs/operators';
-import { Filters } from './filtes.enum';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ListService {
-  observable: BehaviorSubject<any>;
+  observableLists: BehaviorSubject<any>;
+  private subjectTodos = new Subject<any>();
 
   constructor(@Inject('LocalStorage') private localStorage: any) {
   }
@@ -20,13 +22,13 @@ export class ListService {
   get(): BehaviorSubject<any> {
     let list = this.getDataFromLS();
     list = list.map(item => (ListModel.create(item)));
-    return this.observable = new BehaviorSubject(list);
+    return this.observableLists = new BehaviorSubject(list);
   }
 
   add(list, item) {
     const updatedList = [...list, ...[ListModel.create(item)]];
     this.localStorage.setItem('list', JSON.stringify(updatedList));
-    this.observable.next(updatedList);
+    this.observableLists.next(updatedList);
   }
 
   getById(id: string) {
@@ -34,5 +36,19 @@ export class ListService {
       filter(item => (get(item, 'id') === id)),
       map((item: ListModel) => (ListModel.create(item))),
     );
+  }
+
+  getTodos(): any {
+    return this.subjectTodos.asObservable();
+  }
+
+  updateTodos(todos = [], listId) {
+    const lists = this.getDataFromLS();
+    const findedIndex = findIndex(lists, { id: listId });
+    if (findedIndex !== -1) {
+      lists[findedIndex].todos = todos;
+      this.localStorage.setItem('list', JSON.stringify(lists));
+      this.subjectTodos.next(todos);
+    }
   }
 }
