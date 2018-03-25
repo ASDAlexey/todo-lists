@@ -6,8 +6,14 @@
 
   &-item {
     margin-top: 7px;
+    display: none;
+
+    &.showed {
+      display: block;
+    }
 
     &__link {
+      text-transform: capitalize;
       color: $black;
       position: relative;
       z-index: 0;

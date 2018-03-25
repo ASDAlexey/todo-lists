@@ -18,10 +18,18 @@
       [values]="[filters.All.toLowerCase(),filters.Undone.toLowerCase()]"
     ></app-radio-group>
   </form>
-  <ul>
-    <li *ngFor="let todo of todos" (click)="changeTodo(todo)">
+  <ul class="todo-list">
+    <li class="todo-list__item" [ngClass]="{'showed':!todos.length}">
+      <span>No items added</span>
+    </li>
+    <li
+      [ngClass]="{'showed':todos.length}"
+      *ngFor="let todo of todos"
+      (click)="changeTodo(todo)"
+      class="todo-list__item"
+    >
       <span>{{ todo.name }}</span>
-      <span>{{ todo.checked }}</span>
+      <span class="todo-list__icon" [ngClass]="{'checked':todo.checked}"></span>
     </li>
   </ul>
 
