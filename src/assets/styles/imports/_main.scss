@@ -3,7 +3,6 @@ html, body, .h-100 {
 }
 
 .container {
-  padding: 40px;
   max-width: 1024px;
   margin: 0 auto;
   background-color: $light-blue;
@@ -11,6 +10,17 @@ html, body, .h-100 {
   position: relative;
   z-index: 0;
   border: 1px solid $black;
+  padding: 40px 40px 125px 40px;
+
+  &__details {
+    overflow: auto;
+    padding-bottom: 40px;
+  }
+
+  .inner-container {
+    height: 100%;
+    overflow: auto;
+  }
 }
 
 .title {
