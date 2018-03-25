@@ -39,7 +39,7 @@
 2. Content-Type: application/json - send json data
    
 ### DESCRIPTION
- - Qioon site description
+ - Todo list description
 
 ### HTTP response	Description
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
