@@ -1,0 +1,50 @@
+<div class="container container__details">
+  <h1 class="title">Details page list: {{ listItem ? listItem.name:'' }}</h1>
+  <form
+    class="form"
+    role="form"
+    [formGroup]="filterForm"
+  >
+    <app-input
+      [form]="filterForm"
+      control="search"
+      maxLength="20"
+      placeholder="Search..."
+    ></app-input>
+    <app-radio-group
+      [form]="filterForm"
+      control="filter"
+      [labels]="[filters.All,filters.Undone]"
+      [values]="[filters.All.toLowerCase(),filters.Undone.toLowerCase()]"
+    ></app-radio-group>
+  </form>
+  <ul class="todo-list">
+    <li class="todo-list__item" [ngClass]="{'showed':!todos.length}">
+      <span>No items added</span>
+    </li>
+    <li
+      [ngClass]="{'showed':todos.length}"
+      *ngFor="let todo of todos"
+      (click)="changeTodo(todo)"
+      class="todo-list__item"
+    >
+      <span>{{ todo.name }}</span>
+      <span class="todo-list__icon" [ngClass]="{'checked':todo.checked}"></span>
+    </li>
+  </ul>
+
+  <form
+    class="form add-todo-form"
+    role="form"
+    [formGroup]="todoForm"
+    (keydown.enter)="addTodo()"
+  >
+    <app-input
+      [form]="todoForm"
+      control="name"
+      maxLength="20"
+      placeholder="Add todo..."
+    ></app-input>
+    <a class="btn" [routerLink]="['/lists']">Back</a>
+  </form>
+</div>
