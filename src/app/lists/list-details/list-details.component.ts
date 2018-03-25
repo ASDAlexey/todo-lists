@@ -35,7 +35,7 @@ export class ListDetailsComponent implements OnInit {
     this.routeId = activatedRoute.snapshot.params.id;
   }
 
-  initFilterForm() {
+  initFilterForm(): void {
     const { search = '', filter = '' } = this.activatedRoute.snapshot.queryParams;
     this.filterForm = this.formBuilder.group({
       search: [search, Validators.compose([
@@ -43,7 +43,7 @@ export class ListDetailsComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(20),
       ])],
-      filter: [filter, Validators.required],
+      filter: [filter || Filters.All.toLocaleLowerCase(), Validators.required],
     });
   }
 
@@ -57,13 +57,16 @@ export class ListDetailsComponent implements OnInit {
     });
   }
 
-  redirect(data) {
+  redirect(data): void {
     const { filter, search } = data;
-    const queryParams = { filter: filter || 'all', ...(search && { search }) };
+    const queryParams = {
+      filter: filter === Filters.All.toLocaleLowerCase() || filter === Filters.Undone.toLocaleLowerCase() ? filter : Filters.All.toLocaleLowerCase(),
+      ...(search && { search }),
+    };
     this.router.navigate([`/lists/${this.routeId}`], { queryParams });
   }
 
-  detectFilterChanges() {
+  detectFilterChanges(): void {
     // detect filter changes and update url query string
     const filtersObserver = {
       next: (data) => {
@@ -75,7 +78,7 @@ export class ListDetailsComponent implements OnInit {
     this.subscribers.filter = this.filterForm.valueChanges.subscribe(filtersObserver);
   }
 
-  getList(id: string) {
+  getList(id: string): void {
     this.subscribers.item = this.listService.getById(id).subscribe((data: ListModel) => {
       this.listItem = data;
       this.listService.updateTodos(this.listItem.todos, this.routeId);
@@ -83,7 +86,7 @@ export class ListDetailsComponent implements OnInit {
     });
   }
 
-  filter(todos) {
+  filter(todos): TodoModel[] {
     const name = get(this, 'filterForm.value.search');
     const options = {
       ...(get(this, 'filterForm.value.filter') === 'undone' && { checked: false }),
@@ -114,7 +117,7 @@ export class ListDetailsComponent implements OnInit {
     this.detectFilterChanges();
   }
 
-  addTodo() {
+  addTodo(): void {
     if (this.todoForm.valid) {
       const { name } = this.todoForm.value;
       const isUniqName = !find(this.listItem.todos, item => (item.name.toLowerCase() === name.toLowerCase()));
@@ -126,7 +129,7 @@ export class ListDetailsComponent implements OnInit {
     }
   }
 
-  changeTodo(todo: TodoModel) {
+  changeTodo(todo: TodoModel): void {
     todo.checked = !todo.checked;
     this.listService.updateTodos(this.listItem.todos, this.routeId);
   }

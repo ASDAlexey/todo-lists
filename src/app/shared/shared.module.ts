@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputComponent } from './components/input/input.component';
-import { PreloaderComponent } from './components/preloader/preloader.component';
 import { ReplacePipe } from './pipes/replace.pipe';
 import { SharedConstants } from './shared.constant';
 import { RadioComponent } from './components/radio/radio.component';
@@ -28,7 +27,6 @@ const components = [
   CheckboxComponent,
   RadioComponent,
   ButtonComponent,
-  PreloaderComponent,
 ];
 
 

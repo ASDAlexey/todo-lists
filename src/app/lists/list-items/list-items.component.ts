@@ -13,7 +13,7 @@ import { ListService } from '../list.service';
 export class ListItemsComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
-  list: ListModel[] = [ListModel.create({ name: 'Homeworks' })];
+  list: ListModel[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private toastrService: ToastrService,
@@ -21,7 +21,7 @@ export class ListItemsComponent implements OnInit {
     listService.get().subscribe(data => this.list = data);
   }
 
-  setForm(product: ListModel = ListModel.create()) {
+  setForm(product: ListModel = ListModel.create()): void {
     this.form = this.formBuilder.group({
       name: [product.name || '', Validators.compose([
         Validators.required,
@@ -31,11 +31,11 @@ export class ListItemsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setForm();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.form.valid) {
       const { name } = this.form.value;
       const isUniqName = !find(this.list, item => (item.name.toLowerCase() === name.toLowerCase()));
