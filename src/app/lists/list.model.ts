@@ -1,5 +1,6 @@
 import * as uuidv4 from 'uuid/v4';
 import get from 'lodash-es/get';
+import filter from 'lodash-es/filter';
 import { AbstractModel } from '../shared/model/abstract.model';
 import { TodoModel } from './todo.model';
 

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { clone, without } from 'lodash';
-import { ListModel } from '../list.model';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { clone, without, union, find, get } from 'lodash';
+import { ListModel } from '../list.model';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ToastrService } from 'ngx-toastr';
+import { ListService } from '../list.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +16,10 @@ export class ListItemsComponent implements OnInit {
   submitted: boolean = false;
   list: ListModel[] = [ListModel.create({ name: 'Homeworks' })];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private toastrService: ToastrService,
+              private listService: ListService) {
+    listService.get().subscribe(data => this.list = data);
   }
 
   setForm(product: ListModel = ListModel.create()) {
@@ -32,7 +38,12 @@ export class ListItemsComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+      const { name } = this.form.value;
+      const isUniqName = !find(this.list, item => (item.name.toLowerCase() === name.toLowerCase()));
+      if (isUniqName) {
+        this.listService.add(this.list, { name });
+        this.form.reset();
+      } else this.toastrService.error(`List name: ${name} don't unique`);
     }
   }
 }
