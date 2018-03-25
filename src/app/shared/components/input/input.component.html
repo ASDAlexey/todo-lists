@@ -1,0 +1,25 @@
+<label class="form-block__label" *ngIf="label" [innerHTML]="label"></label>
+<div
+  class="form-group form-block"
+  [formGroup]="form"
+  [ngClass]="{error: submitted && !form.get(control).valid}"
+>
+  <input
+    *ngIf="!currency"
+    class="form-control"
+    [type]="type"
+    [attr.placeholder]="placeholder"
+    [formControlName]="control"
+    [attr.maxLength]="maxLength?maxLength:null"
+    [attr.disabled]="disabled ? '':null"
+  >
+  <span
+    *ngIf="submitted && !form.get(control).valid && !errorsHide"
+    class="help-block"
+  >
+    <span
+      *ngIf="form.get(control).hasError('required')">
+      This field is required
+    </span>
+  </span>
+</div>

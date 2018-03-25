@@ -1,0 +1,94 @@
+html, body, .h-100 {
+  height: 100%;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  background-color: $light-blue;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  border: 1px solid $black;
+  padding: 40px 40px 125px 40px;
+
+  &__details {
+    overflow: auto;
+    padding-bottom: 40px;
+  }
+
+  .inner-container {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.title {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.ttu {
+  text-transform: uppercase;
+}
+
+.form {
+  width: 100%;
+
+  &__stick-bottom {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    padding: 0 20px 20px;
+  }
+
+  input[type="text"],
+  button,
+  .btn,
+  app-input,
+  app-button {
+    width: 100%;
+  }
+
+  input[type="text"] {
+    background-color: $white;
+    height: 40px;
+    font-size: 24px;
+    line-height: 24px;
+    margin: 20px 0;
+    border: 1px solid $black;
+    padding: 0 20px 3px;
+  }
+
+  button,
+  .btn {
+    border: 1px solid $black;
+    font-size: 24px;
+    line-height: 24px;
+    height: 40px;
+    background-color: $light-green;
+    border-radius: 5px;
+    color: $black;
+    padding-bottom: 3px;
+    transition: background-color .5s;
+
+    &:hover {
+      background-color: $green;
+    }
+  }
+
+  a.btn {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    background-color: $blue;
+    width: auto;
+    padding: 6px 20px 0;
+    color: $white;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+  }
+}
