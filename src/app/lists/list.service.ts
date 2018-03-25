@@ -6,13 +6,14 @@ import get from 'lodash-es/get';
 import findIndex from 'lodash-es/findIndex';
 import { filter, map } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ListService {
   observableLists: BehaviorSubject<any>;
   private subjectTodos = new Subject<any>();
 
-  constructor(@Inject('LocalStorage') private localStorage: any) {
+  constructor(@Inject('LocalStorage') private localStorage: any, private router: Router) {
   }
 
   private getDataFromLS() {
@@ -32,7 +33,9 @@ export class ListService {
   }
 
   getById(id: string) {
-    return from(this.getDataFromLS()).pipe(
+    const list = this.getDataFromLS();
+    if (!(list && list.length)) this.router.navigate(['/lists']);
+    return from(list).pipe(
       filter(item => (get(item, 'id') === id)),
       map((item: ListModel) => (ListModel.create(item))),
     );
