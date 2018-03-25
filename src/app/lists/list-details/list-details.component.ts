@@ -83,6 +83,24 @@ export class ListDetailsComponent implements OnInit {
     });
   }
 
+  filter(todos) {
+    const name = get(this, 'filterForm.value.search');
+    const options = {
+      ...(get(this, 'filterForm.value.filter') === 'undone' && { checked: false }),
+      ...(name && { name }),
+    };
+    return lFilter(todos, (item) => {
+      let cond = true;
+      if (options.hasOwnProperty('checked')) cond = item.checked === false;
+
+      // startWith polifill added to polyfills.ts
+      if (options.hasOwnProperty('name') && cond) {
+        cond = item.name.toLowerCase().startsWith(options.name.toLowerCase());
+      }
+      return cond;
+    });
+  }
+
   ngOnInit(): void {
     // exec redirect in case empty url query string filter
     this.redirect(this.activatedRoute.snapshot.queryParams);
@@ -90,36 +108,7 @@ export class ListDetailsComponent implements OnInit {
     this.initFilterForm();
     this.setTodoForm();
     this.subscribers.todos = this.listService.getTodos()
-      .pipe(
-        map((todos) => {
-          const name = get(this, 'filterForm.value.search');
-          const options = {
-            ...(get(this, 'filterForm.value.filter') === 'undone' && { checked: false }),
-            ...(name && { name }),
-          };
-          return lFilter(todos, (item) => {
-            let cond = true;
-            if (options.hasOwnProperty('checked')) cond = item.checked === false;
-
-            // startWith polifill added to polyfills.ts
-            if (options.hasOwnProperty('name') && cond) {
-              cond = item.name.toLowerCase().startsWith(options.name.toLowerCase());
-            }
-            return cond;
-          });
-        }),
-        // flatMap((item: any) => item),
-        // rxFilter((item: any) => {
-        //   // console.log(get(this, 'filterForm.value.filter'));
-        //   // console.log(item);
-        //   return !item.checked;
-        // }),
-        // reduce((acc: any, currentValue: any) => {
-        //   console.log('acc', acc);
-        //   console.log('currentValue', currentValue);
-        //   return [...acc, currentValue];
-        // }, []),
-      )
+      .pipe(map(todos => this.filter(todos)))
       .subscribe((todos: TodoModel[]) => (this.todos = todos));
     this.getList(this.routeId);
     this.detectFilterChanges();
