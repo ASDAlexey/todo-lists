@@ -102,7 +102,9 @@ export class ListDetailsComponent implements OnInit {
             if (options.hasOwnProperty('checked')) cond = item.checked === false;
 
             // startWith polifill added to polyfills.ts
-            if (options.hasOwnProperty('name') && cond) cond = item.name.startsWith(options.name);
+            if (options.hasOwnProperty('name') && cond) {
+              cond = item.name.toLowerCase().startsWith(options.name.toLowerCase());
+            }
             return cond;
           });
         }),
