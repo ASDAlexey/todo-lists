@@ -281,3 +281,15 @@ html.tablet a:hover {
 a[routerlink] {
   cursor: pointer;
 }
+
+::-webkit-input-placeholder {
+  color: $black;
+}
+
+::-moz-placeholder {
+  color: $black;
+}
+
+:-ms-input-placeholder {
+  color: $black;
+}
