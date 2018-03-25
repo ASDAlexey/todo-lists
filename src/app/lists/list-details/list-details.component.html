@@ -1,7 +1,10 @@
 <div class="container">
   <h1 class="title">Details page list: {{ listItem.name }}</h1>
-  filtersForm
-  <form [formGroup]="filterForm">
+  <form
+    class="form"
+    role="form"
+    [formGroup]="filterForm"
+  >
     <app-input
       [form]="filterForm"
       control="search"
@@ -15,9 +18,6 @@
       [values]="[filters.All.toLowerCase(),filters.Undone.toLowerCase()]"
     ></app-radio-group>
   </form>
-
-  {{ filterForm.value | json}}
-
   <ul>
     <li *ngFor="let todo of todos" (click)="changeTodo(todo)">
       <span>{{ todo.name }}</span>
@@ -26,7 +26,7 @@
   </ul>
 
   <form
-    class="add-todo-form"
+    class="form add-todo-form"
     role="form"
     [formGroup]="todoForm"
     (keydown.enter)="addTodo()"
@@ -37,6 +37,6 @@
       maxLength="20"
       placeholder="Add todo..."
     ></app-input>
+    <a class="btn" [routerLink]="['/lists']">Back</a>
   </form>
-  <a [routerLink]="['/lists']">Back</a>
 </div>
