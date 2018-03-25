@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Filters } from '../filtes.enum';
 import { TodoModel } from '../todo.model';
+import { ListService } from '../list.service';
+import { ListModel } from '../list.model';
 
 @Component({
   selector: 'app-product-add-edit',
@@ -14,11 +16,13 @@ export class ListDetailsComponent implements OnInit {
   filterForm: FormGroup;
   todoForm: FormGroup;
   filters = Filters;
-  todos: TodoModel[] = [TodoModel.create({ name: 'Apple', listId: 9 })];
+  listItem: ListModel;
+  todos: TodoModel[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private listService: ListService) {
     this.routeId = activatedRoute.snapshot.params.id;
   }
 
@@ -59,10 +63,18 @@ export class ListDetailsComponent implements OnInit {
     this.filterForm.valueChanges.subscribe(filtersObserver);
   }
 
+  getList(id: string) {
+    this.listService.getById(id).subscribe((data: ListModel) => {
+      this.listItem = data;
+      console.log(this.listItem);
+    });
+  }
+
   ngOnInit(): void {
     // exec redirect in case empty url query string filter
     this.redirect(this.activatedRoute.snapshot.queryParams);
 
+    this.getList(this.routeId);
     this.initFilterForm();
     this.setTodoForm();
     this.detectFilterChanges();
@@ -70,11 +82,13 @@ export class ListDetailsComponent implements OnInit {
 
   addTodo() {
     if (this.todoForm.valid) {
-      console.log(this.todoForm.value);
+      this.listItem.todos.push(TodoModel.create(this.todoForm.value));
+      this.todoForm.reset();
     }
   }
 
   changeTodo(todo: TodoModel) {
     console.log(todo);
+    todo.checked = !todo.checked;
   }
 }

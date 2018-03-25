@@ -1,6 +1,6 @@
 import * as uuidv4 from 'uuid/v4';
 import get from 'lodash-es/get';
-import filter from 'lodash-es/filter';
+import map from 'lodash-es/map';
 import { AbstractModel } from '../shared/model/abstract.model';
 import { TodoModel } from './todo.model';
 
@@ -13,7 +13,7 @@ export class ListModel extends AbstractModel {
     super();
     this.id = get(data, 'id') ? data.id : uuidv4();
     this.name = get(data, 'name');
-    this.todos = get(data, 'todos', []);
+    this.todos = map(get(data, 'todos', []), todo => TodoModel.create(todo));
   }
 
   getCountUndoneTodos() {
