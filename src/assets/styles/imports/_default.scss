@@ -20,6 +20,10 @@ body {
   color: $black;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input[type="reset"] {
   display: none;
 }
