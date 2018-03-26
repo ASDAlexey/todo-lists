@@ -17,6 +17,10 @@
 
     span:first-child {
       text-transform: capitalize;
+
+      &.checked {
+        text-decoration: line-through;
+      }
     }
   }
 

@@ -28,7 +28,7 @@
       (click)="changeTodo(todo)"
       class="todo-list__item"
     >
-      <span>{{ todo.name }}</span>
+      <span [ngClass]="{'checked':todo.checked}">{{ todo.name }}</span>
       <span class="todo-list__icon" [ngClass]="{'checked':todo.checked}"></span>
     </li>
   </ul>
